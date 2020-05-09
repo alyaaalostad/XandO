@@ -42,10 +42,10 @@ struct TicTacToeButton: View {
         
         func winners(player: String){
             
-            let r1 = fields[0][1].Text == player && fields[0][2].Text == player && fields[0][3].Text == player
+            let r1 = fields[0][0].Text == player && fields[0][1].Text == player && fields[0][2].Text == player
             let r2 = fields[1][0].Text == player && fields[1][1].Text == player && fields[1][2].Text == player
             let r3 = fields[2][0].Text == player && fields[2][1].Text == player && fields[2][2].Text == player
-            let c1 = fields[0][0].Text == player && fields[0][1].Text == player && fields[0][2].Text == player
+            let c1 = fields[0][0].Text == player && fields[1][0].Text == player && fields[2][0].Text == player
             let c2 = fields[0][1].Text == player && fields[1][1].Text == player && fields[2][1].Text == player
             let c3 = fields[0][2].Text == player && fields[1][2].Text == player && fields[2][2].Text == player
             let d1 = fields[0][0].Text == player && fields[1][1].Text == player && fields[2][2].Text == player
@@ -55,7 +55,8 @@ struct TicTacToeButton: View {
             {
                 winner = "\(player) Won!!!"
                 SoundEffect(sound: "game", type: "mp3")
-            }else if counter == 9{
+            }
+            else if counter == 9{
                 winner = "It's a Tie"
             }
         }
