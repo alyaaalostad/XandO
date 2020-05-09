@@ -54,6 +54,7 @@ struct TicTacToeButton: View {
             if r1 || r2 || r3 || c1 || c2 || c3 || d1 || d2
             {
                 winner = "\(player) Won!!!"
+                SoundEffect(sound: "game", type: "mp3")
             }else if counter == 9{
                 winner = "It's a Tie"
             }

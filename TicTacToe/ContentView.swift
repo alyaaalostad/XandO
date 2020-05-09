@@ -23,14 +23,45 @@ struct ContentView: View {
     
     var body: some View {
         ZStack{
+   
             
             Image("dark")
                 .resizable()
                 .edgesIgnoringSafeArea(.all)
-//                .opacity(0.8)
+                .opacity(0.9)
+            HStack{
+                Button(action: {
+                SoundEffect(sound: "Star Wars", type: "mp3")
+                   
+                
+                }) {
+                    Image("music")
+                        .foregroundColor(.white)
+                        
+                    
+                    }
+                .offset(x: 100, y:-340)
+                .font(.system(size:50))
+                
+                Button(action: {
+                    audioPlayer?.stop()
+                   
+                }) {
+                    Image("soundoff")
+                        .foregroundColor(.white)
+                        
+                    
+                    }
+                .offset(x: 110, y:-340)
+                .font(.system(size:50))
+          
+            }
             
-            
+    
+                      
             VStack(spacing: 35){
+                
+                
                 
                 Text(winner)
                     .font(.system(size: 50, design: .rounded))
