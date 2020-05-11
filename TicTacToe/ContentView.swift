@@ -8,19 +8,11 @@
 
 import SwiftUI
 
-struct Field{
-    var Text: String
-    var enabled: Bool
-}
+
 
 
 struct ContentView: View {
-    @State var fields: [[Field]] = .init(repeating: .init(repeating: Field(Text: "", enabled: true), count: 3), count: 3)
-    
-    @State var counter = 0
-    @State var currentPlayer = "X"
-    @State var winner = ""
-    
+    @EnvironmentObject var env: Env
     var body: some View {
         ZStack{
    
@@ -32,29 +24,29 @@ struct ContentView: View {
             HStack{
                 Button(action: {
                 SoundEffect(sound: "Star Wars", type: "mp3")
-                   
-                
+
+
                 }) {
                     Image("music")
                         .foregroundColor(.white)
-                        
-                    
+
+
                     }
                 .offset(x: 100, y:-340)
                 .font(.system(size:50))
-                
+
                 Button(action: {
                     audioPlayer?.stop()
-                   
+
                 }) {
                     Image("soundoff")
                         .foregroundColor(.white)
-                        
-                    
+
+
                     }
                 .offset(x: 110, y:-340)
                 .font(.system(size:50))
-          
+
             }
             
     
@@ -63,29 +55,29 @@ struct ContentView: View {
                 
                 
                 
-                Text(winner)
+                Text(env.winner)
                     .font(.system(size: 50, design: .rounded))
                     .bold()
                     .foregroundColor(.red)
                 
-                Text("\(currentPlayer)'s Trun")
+                Text("\(env.currentPlayer.text())'s Trun")
                     .font(.system(size: 45, design: .rounded))
                     .foregroundColor(.white)
                     .bold()
                 
                 
-                Text("\(counter)")
+                Text("\(env.counter)")
                     .font(.system(size: 45, design: .rounded))
                     .foregroundColor(.gray)
                     .bold()
                 
                 
                 
-                Grid(fields: $fields, counter: $counter, currentPlayer : $currentPlayer, winner: $winner)
+                Grid()
                 
-                if winner != ""{
+                if env.winner != ""{
                     Button(action: {
-                        self.restartGame()
+                        self.env.restartGame()
                     }) {
                         Text("Restart Game")
                             .font(.system(size: 45, design: .rounded))
@@ -99,16 +91,11 @@ struct ContentView: View {
     }
     
     
-    func restartGame(){
-        fields = .init(repeating: .init(repeating: Field(Text: "", enabled: true), count: 3), count: 3)
-        winner = ""
-        counter = 0
-        currentPlayer = "X"
-    }
+
 }
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        ContentView()
+        ContentView().environmentObject(Env())
     }
 }
